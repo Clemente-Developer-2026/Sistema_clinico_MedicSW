@@ -14,5 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('administracion.index');
 });
+
+// Médicos y Horarios
+Route::get('/medicos', function () { return view('medicos.index'); });
+Route::get('/medicos/registrar', function () { return view('medicos.create'); });
+Route::get('/horarios', function () { return view('medicos.horarios'); });
+
+// Administración
+Route::get('/administracion', function () { return view('administracion.index'); });
+
+// Historial Clínico
+Route::get('/historiales', function () { return view('historial.index'); });
+Route::get('/historiales/nuevo', function () { return view('historial.create'); });
+Route::get('/historiales/detalle/{id}', function ($id) { return view('historial.show'); });
