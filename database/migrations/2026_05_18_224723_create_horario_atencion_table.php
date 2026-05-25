@@ -20,6 +20,9 @@ return new class extends Migration
 
             $table->time('hora_fin');
 
+            //Para controlar las fichas
+            $table->integer('limite_pacientes')->default(15);
+
             $table->smallInteger('estado')->default(1);
 
             $table->timestamps();
