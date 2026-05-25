@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            //Nuevos campos agragados
+            $table->string('rol',20)->default('paciente'); //Admin medico paciente, recepcionista
+            $table->smallInteger('estado')->default(1);
+
+
             $table->rememberToken();
             $table->timestamps();
         });
