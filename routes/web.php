@@ -29,3 +29,16 @@ Route::get('/administracion', function () { return view('administracion.index');
 Route::get('/historiales', function () { return view('historial.index'); });
 Route::get('/historiales/nuevo', function () { return view('historial.create'); });
 Route::get('/historiales/detalle/{id}', function ($id) { return view('historial.show'); });
+
+// Pacientes
+Route::get('/pacientes', function () {return view('pacientes.index');});
+Route::get('/pacientes/nuevo', function () {return view('pacientes.create');});
+Route::get('/pacientes/editar', function () {return view('pacientes.edit');});
+
+// Citas Médicas
+Route::get('/citas', function () {return view('citas.index');});
+Route::get('/citas/nueva', function () {return view('citas.create');});
+Route::get('/citas/editar', function () {return view('citas.edit');});
+
+// Login
+Route::get('/login', function () {return view('auth.login');});

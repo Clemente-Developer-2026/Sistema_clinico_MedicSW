@@ -33,6 +33,22 @@
         <i class="fa-solid fa-file-medical w-5 transition-transform duration-300 group-hover:scale-110"></i> 
         <span>Historial Clínico</span>
     </a>
+
+    <a href="/pacientes" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
+        <i class="fa-solid fa-user-injured w-5"></i>
+        <span>Pacientes</span>
+    </a>
+
+    <a href="/citas" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
+        <i class="fa-solid fa-calendar-check w-5"></i>
+        <span>Citas Médicas</span>
+    </a>
+
+    <a href="/login" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
+        <i class="fa-solid fa-right-to-bracket w-5"></i>
+        <span>Login</span>
+    </a>
+
 </nav>
         </div>
 
