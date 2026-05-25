@@ -44,8 +44,7 @@
 
         <div class="md:col-span-2 flex justify-end gap-4">
 
-            <a href="/pacientes"
-            class="bg-slate-300 hover:bg-slate-400 text-slate-700 px-6 py-3 rounded-xl transition">
+            <a href="/pacientes" class="bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-xl">
                 Cancelar
             </a>
 
