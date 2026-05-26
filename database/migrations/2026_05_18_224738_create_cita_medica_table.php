@@ -11,23 +11,19 @@ return new class extends Migration
         Schema::create('cita_medica', function (Blueprint $table) {
 
             $table->id('id_cita');
-
             $table->unsignedBigInteger('id_paciente');
-
             $table->unsignedBigInteger('id_medico');
-
             $table->unsignedBigInteger('id_especialidad');
-
             $table->date('fecha_cita');
-
             $table->time('hora_cita');
 
-            $table->string('estado_cita', 20);
+            //CAMPOS AGREGADOS PATA EL CONTROL VISUAL Y FLUJO DE
+            $table->integer('numero_ficha')->nullable();
+            $table->string('estado_cita', 20)->default('Pendiente');
+
 
             $table->text('observaciones_consulta')->nullable();
-
             $table->smallInteger('estado')->default(1);
-
             $table->timestamps();
 
             $table->foreign('id_paciente')
