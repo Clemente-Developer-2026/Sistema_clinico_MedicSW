@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'rol',      // <-- Agregado para el CRUD de usuarios
+        'estado',   // <-- Agregado para el CRUD de usuarios
     ];
 
     /**

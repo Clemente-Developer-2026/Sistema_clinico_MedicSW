@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body class="bg-slate-50 font-sans flex h-screen overflow-hidden">
 
     <aside class="w-64 bg-sky-600 text-white flex flex-col justify-between shadow-xl">
@@ -15,41 +17,58 @@
                 <i class="fa-solid fa-heart-pulse text-2xl"></i>
                 <span class="font-bold text-lg tracking-wider">MedicSW</span>
             </div>
-            
+
             <nav class="mt-6 px-4 space-y-2">
-    <p class="text-xs font-semibold text-sky-200 uppercase px-2 mb-2 tracking-wider">Vista</p>
-    
-    <a href="/medicos" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1 group {{ Request::is('medicos*') ? 'bg-sky-500 font-semibold shadow-md' : '' }}">
-        <i class="fa-solid fa-user-doctor w-5 transition-transform duration-300 group-hover:scale-110"></i> 
-        <span>Gestión de Médicos</span>
-    </a>
-    
-    <a href="/horarios" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1 group {{ Request::is('horarios*') ? 'bg-sky-500 font-semibold shadow-md' : '' }}">
-        <i class="fa-solid fa-calendar-clock w-5 transition-transform duration-300 group-hover:scale-110"></i> 
-        <span>Horarios de Atención</span>
-    </a>
-    
-    <a href="/historiales" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1 group {{ Request::is('historiales*') ? 'bg-sky-500 font-semibold shadow-md' : '' }}">
-        <i class="fa-solid fa-file-medical w-5 transition-transform duration-300 group-hover:scale-110"></i> 
-        <span>Historial Clínico</span>
-    </a>
+                <p class="text-xs font-semibold text-sky-200 uppercase px-2 mb-2 tracking-wider">Vista</p>
 
-    <a href="/pacientes" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
-        <i class="fa-solid fa-user-injured w-5"></i>
-        <span>Pacientes</span>
-    </a>
+                <a href="/medicos"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1 group {{ Request::is('medicos*') ? 'bg-sky-500 font-semibold shadow-md' : '' }}">
+                    <i class="fa-solid fa-user-doctor w-5 transition-transform duration-300 group-hover:scale-110"></i>
+                    <span>Gestión de Médicos</span>
+                </a>
 
-    <a href="/citas" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
-        <i class="fa-solid fa-calendar-check w-5"></i>
-        <span>Citas Médicas</span>
-    </a>
+                <a href="/horarios"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1 group {{ Request::is('horarios*') ? 'bg-sky-500 font-semibold shadow-md' : '' }}">
+                    <i
+                        class="fa-solid fa-calendar-clock w-5 transition-transform duration-300 group-hover:scale-110"></i>
+                    <span>Horarios de Atención</span>
+                </a>
 
-    <a href="/login" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
-        <i class="fa-solid fa-right-to-bracket w-5"></i>
-        <span>Login</span>
-    </a>
+                <a href="/historiales"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1 group {{ Request::is('historiales*') ? 'bg-sky-500 font-semibold shadow-md' : '' }}">
+                    <i class="fa-solid fa-file-medical w-5 transition-transform duration-300 group-hover:scale-110"></i>
+                    <span>Historial Clínico</span>
+                </a>
 
-</nav>
+                <a href="/pacientes"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
+                    <i class="fa-solid fa-user-injured w-5"></i>
+                    <span>Pacientes</span>
+                </a>
+
+                <a href="/citas"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
+                    <i class="fa-solid fa-calendar-check w-5"></i>
+                    <span>Citas Médicas</span>
+                </a>
+                <a href="{{ route('usuarios.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1 group {{ Request::is('usuarios*') ? 'bg-sky-500 font-semibold shadow-md' : '' }}">
+                    <i class="fa-solid fa-users-gear w-5 transition-transform duration-300 group-hover:scale-110"></i>
+                    <span>Gestión de Usuarios</span>
+                </a>
+
+                <a href="/login"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
+                    <i class="fa-solid fa-right-to-bracket w-5"></i>
+                    <span>Login</span>
+                </a>
+
+                <a href="{{ route('login.post') }}"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
+                    <i class="fa-solid fa-right-to-bracket w-5"></i>
+                    <span>Logout</span>
+                </a>
+
+            </nav>
         </div>
 
         <div class="p-4 border-t border-sky-500 bg-sky-700 flex items-center justify-between">
@@ -73,4 +92,5 @@
     </main>
 
 </body>
+
 </html>
