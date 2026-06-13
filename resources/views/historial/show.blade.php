@@ -1,59 +1,129 @@
 @extends('layouts.app')
 
-@section('modulo_titulo', 'Expediente Clínico del Paciente')
+@section('modulo_titulo', 'Historial de ' . $paciente->nombres)
 
 @section('contenido')
-<div class="space-y-6">
-    <div class="bg-white p-6 rounded-xl border border-slate-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-            <span class="text-xs font-bold text-sky-600 uppercase tracking-wider font-mono">Nro. Expediente: 1</span>
-            <h2 class="text-2xl font-black text-slate-800">Jhon</h2>
-            <p class="text-sm text-slate-500">CI: 1 &bull; Edad:  &bull; Sangre:  &bull; Alergias: </p>
+
+{{-- Datos del paciente --}}
+<div class="bg-white rounded-2xl shadow-sm p-6 mb-6">
+    <div class="flex items-center gap-5">
+        <div class="w-16 h-16 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold text-2xl">
+            {{ strtoupper(substr($paciente->nombres, 0, 1)) }}
         </div>
-        <a href="/historiales" class="px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">
-            <i class="fa-solid fa-arrow-left mr-2"></i> Volver al Listado
+        <div class="flex-1">
+            <h2 class="text-xl font-bold text-slate-700">
+                {{ $paciente->nombres }} {{ $paciente->apellidos }}
+            </h2>
+            <div class="flex gap-6 mt-1 text-sm text-slate-400 flex-wrap">
+                <span><i class="fa-solid fa-id-card mr-1"></i>{{ $paciente->carnet_identidad }}</span>
+                <span><i class="fa-solid fa-cake-candles mr-1"></i>
+                    {{ \Carbon\Carbon::parse($paciente->fecha_nacimiento)->age }} años
+                </span>
+                @if($paciente->grupo_sanguineo)
+                <span class="text-red-500 font-semibold">
+                    <i class="fa-solid fa-droplet mr-1"></i>{{ $paciente->grupo_sanguineo }}
+                </span>
+                @endif
+                @if($paciente->telefono)
+                <span><i class="fa-solid fa-phone mr-1"></i>{{ $paciente->telefono }}</span>
+                @endif
+            </div>
+        </div>
+        <a href="{{ route('historial.index') }}"
+            class="text-slate-400 hover:text-slate-600 text-sm flex items-center gap-2">
+            <i class="fa-solid fa-arrow-left"></i> Volver
         </a>
     </div>
 
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-        <div class="xl:col-span-2 space-y-4">
-            <h3 class="text-base font-bold text-slate-700 mb-2">Historial de Consultas</h3>
-            
-            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-xs relative overflow-hidden">
-                <div class="absolute top-0 left-0 h-full w-1.5 bg-sky-500"></div>
-                <div class="flex justify-between items-start mb-3">
-                    <div>
-                        <span class="text-xs font-bold text-slate-400 block">20/05/2026</span>
-                        <h4 class="font-bold text-slate-800 text-base">Consulta General</h4>
-                    </div>
-                    <span class="text-xs font-semibold text-slate-600 bg-slate-100 px-2.5 py-1 rounded">Dr. E</span>
+    {{-- Antecedentes --}}
+    @if($paciente->alergias || $paciente->enfermedades_base)
+    <div class="mt-4 pt-4 border-t border-slate-100 grid grid-cols-2 gap-4 text-sm">
+        @if($paciente->alergias)
+        <div class="bg-yellow-50 rounded-xl p-3">
+            <p class="text-yellow-600 font-semibold mb-1">
+                <i class="fa-solid fa-triangle-exclamation mr-1"></i>Alergias
+            </p>
+            <p class="text-slate-600">{{ $paciente->alergias }}</p>
+        </div>
+        @endif
+        @if($paciente->enfermedades_base)
+        <div class="bg-orange-50 rounded-xl p-3">
+            <p class="text-orange-600 font-semibold mb-1">
+                <i class="fa-solid fa-notes-medical mr-1"></i>Enfermedades base
+            </p>
+            <p class="text-slate-600">{{ $paciente->enfermedades_base }}</p>
+        </div>
+        @endif
+    </div>
+    @endif
+</div>
+
+{{-- Lista de consultas --}}
+<div class="bg-white rounded-2xl shadow-lg p-6">
+
+    <div class="flex justify-between items-center mb-6">
+        <h3 class="text-lg font-bold text-slate-700">
+            <i class="fa-solid fa-clock-rotate-left mr-2 text-sky-500"></i>
+            Consultas registradas
+        </h3>
+        <span class="bg-sky-100 text-sky-700 px-3 py-1 rounded-full text-sm font-semibold">
+            {{ $historiales->count() }} consulta(s)
+        </span>
+    </div>
+
+    @forelse($historiales as $historial)
+    <div class="border border-slate-100 rounded-2xl p-5 mb-4 hover:border-sky-200 hover:shadow-sm transition-all">
+        <div class="flex justify-between items-start">
+            <div class="flex gap-4">
+                {{-- Fecha --}}
+                <div class="text-center bg-sky-50 rounded-xl p-3 min-w-[60px]">
+                    <p class="text-sky-600 font-bold text-lg leading-none">
+                        {{ \Carbon\Carbon::parse($historial->cita->fecha_cita)->format('d') }}
+                    </p>
+                    <p class="text-sky-400 text-xs uppercase">
+                        {{ \Carbon\Carbon::parse($historial->cita->fecha_cita)->translatedFormat('M') }}
+                    </p>
+                    <p class="text-sky-400 text-xs">
+                        {{ \Carbon\Carbon::parse($historial->cita->fecha_cita)->format('Y') }}
+                    </p>
                 </div>
-                <div class="space-y-2 text-sm text-slate-600">
-                    <p><strong class="text-slate-800">Sintomatología:</strong> S</p>
-                    <p><strong class="text-slate-800">Diagnóstico:</strong> S2</p>
-                    <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 mt-2">
-                        <strong class="text-xs uppercase font-bold text-sky-700 block mb-1"><i class="fa-solid fa-prescription-bottle-medical mr-1"></i> Tratamiento Indicado</strong>
-                        <p class="text-xs font-mono text-slate-700">Agua</p>
-                    </div>
+                {{-- Info consulta --}}
+                <div>
+                    <p class="font-semibold text-slate-700">{{ $historial->diagnostico }}</p>
+                    <p class="text-sm text-slate-400 mt-1">
+                        <i class="fa-solid fa-user-doctor mr-1"></i>
+                        Dr. {{ $historial->cita->medico->nombres }} {{ $historial->cita->medico->apellidos }}
+                        — {{ $historial->cita->especialidad->nombre }}
+                    </p>
+                    <p class="text-xs text-slate-400 mt-1">
+                        <i class="fa-solid fa-clock mr-1"></i>
+                        {{ \Carbon\Carbon::parse($historial->cita->hora_cita)->format('h:i A') }}
+                        &nbsp;·&nbsp;
+                        Ficha #{{ $historial->cita->numero_ficha }}
+                    </p>
                 </div>
             </div>
+            {{-- Botón ver detalle --}}
+            <a href="{{ route('historial.detalle', [$paciente->id_paciente, $historial->id_historial]) }}"
+                class="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-xl text-xs flex items-center gap-2 shrink-0">
+                <i class="fa-solid fa-eye"></i> Ver detalle
+            </a>
         </div>
 
-        <div class="space-y-4">
-            <h3 class="text-base font-bold text-slate-700 mb-2">Condiciones de Base</h3>
-            <div class="bg-white p-5 rounded-xl border border-slate-200 space-y-3 text-sm">
-                <div>
-                    <span class="block text-xs font-bold text-slate-400 uppercase">Enfermedades de Base</span>
-                    <p class="font-medium text-slate-800">Ninguna</p>
-                </div>
-                <hr class="border-slate-100">
-                <div>
-                    <span class="block text-xs font-bold text-slate-400 uppercase">Contacto de Emergencia</span>
-                    <p class="font-medium text-slate-800">S</p>
-                    <p class="text-xs text-slate-500">Telf: 1122</p>
-                </div>
-            </div>
+        {{-- Resumen motivo --}}
+        @if($historial->motivo_consulta)
+        <div class="mt-3 pt-3 border-t border-slate-100 text-sm text-slate-500">
+            <span class="font-medium text-slate-600">Motivo: </span>
+            {{ Str::limit($historial->motivo_consulta, 120) }}
         </div>
+        @endif
     </div>
+    @empty
+    <div class="text-center py-10 text-slate-400">
+        <i class="fa-solid fa-folder-open text-4xl mb-3 block"></i>
+        No hay consultas registradas para este paciente
+    </div>
+    @endforelse
 </div>
+
 @endsection

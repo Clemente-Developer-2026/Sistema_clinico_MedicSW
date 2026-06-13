@@ -44,6 +44,12 @@
         <span>Citas Médicas</span>
     </a>
 
+    <a href="/consulta" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1 group {{ Request::is('consulta*') ? 'bg-sky-500 font-semibold shadow-md' : '' }}">
+        <i class="fa-solid fa-stethoscope w-5 transition-transform duration-300 group-hover:scale-110"></i>
+        <span>Consultas</span>
+    </a>
+    
+
     <a href="/login" class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ease-in-out transform hover:bg-sky-500/50 hover:translate-x-1">
         <i class="fa-solid fa-right-to-bracket w-5"></i>
         <span>Login</span>
